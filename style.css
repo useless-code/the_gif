@@ -1,0 +1,17 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#container {
+    border: solid red;
+    height: 80px;
+    left: 50px;
+    position: absolute;
+    top: 20px;
+    width: 80px;
+}
