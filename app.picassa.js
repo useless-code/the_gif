@@ -43,6 +43,7 @@ $(document).ready(function (){
         if (image_buffer.length < buffer_limit) {
             buffer_image();
         } else {
+            console.log("Buffer is full!");
             buffering = false;
         };  
       };
@@ -50,6 +51,7 @@ $(document).ready(function (){
     };
 
     //start buffering
+    buffer_image();
     buffer_image();
 
     $(document).click(function() {
@@ -61,7 +63,6 @@ $(document).ready(function (){
       if (image_buffer.length > 0){
         console.log("taking image from buffer");
         var element = image_buffer.splice(0, 1)[0].src;
-        console.log(element);
         if (buffering !== true){
             console.log("buffering restart");
             buffer_image();
@@ -86,7 +87,6 @@ $(document).ready(function (){
       };
       image.src = element;
     });
-
     $(document).click();
 });
 })
