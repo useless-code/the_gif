@@ -5,11 +5,7 @@ $(document).ready(function (){
   };
   var user = "113288886837539699792",
     album = "5898807933959509569",
-    gif_list = [],
-    image_buffer = [],
-    buffer_limit = 10,
-    buffering = false,
-    waiting = false;
+    gif_list = [];
     
   $.get(build_data_url(user, album), function(response) {
     var data_list = response.feed.entry;
@@ -31,61 +27,31 @@ $(document).ready(function (){
         return copy_of_gift_list.splice(index, 1);
     };
 
-    // image_buffering 
+    var buffer = new window.Buffer({
+        data_source: random_element, 
+        limit: 10,
+    });
 
-    function buffer_image() {
-      buffering = true;
-      var element =  random_element();
-      console.log("putting " + element + " in buffer");
-      var image = new Image();
-      image.onload = function () {
-        image_buffer.push(image);
-        if (image_buffer.length < buffer_limit) {
-            buffer_image();
-        } else {
-            console.log("Buffer is full!");
-            buffering = false;
-        };  
-      };
-      image.src = element;
-    };
-
-    //start buffering
-    buffer_image();
-    buffer_image();
-
+    buffer.start();
+    $load_bar = $("#fadingBarsG");
     $(document).click(function() {
-        if (waiting){
+        if (buffer.waiting()){
             console.log("We are loading it");
             return;
         };
-    
-      if (image_buffer.length > 0){
-        console.log("taking image from buffer");
-        var element = image_buffer.splice(0, 1)[0].src;
-        if (buffering !== true){
-            console.log("buffering restart");
-            buffer_image();
-        };
-      } else {
-        var element =  random_element();
-      };
-
-      var image = new Image();
-      waiting = true;
-      image.onload = function () {
-        if (this.height < 270 && this.width > this.height) {
-            var size = Math.floor((270 / this.height) * this.width);
+        $load_bar.show();
+        buffer.get( function (image) {
+          if (image.height < 270 && image.width > image.height) {
+            var size = Math.floor((270 / image.height) * image.width);
             document.body.style.backgroundSize = size + 'px';
-        } else if (this.width < 300) {
+          } else if (image.width < 300) {
             document.body.style.backgroundSize = '300px';
-        } else {
+          } else {
             document.body.style.backgroundSize = 'auto';
-        };
-        document.body.style.backgroundImage = 'url("' + element  + '")';
-        waiting = false;
-      };
-      image.src = element;
+          };
+          document.body.style.backgroundImage = 'url("' + image.src  + '")';
+          $load_bar.hide();
+      });
     });
     $(document).click();
 });
