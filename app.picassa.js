@@ -34,6 +34,7 @@ $(document).ready(function (){
 
     buffer.start();
     $load_bar = $("#fadingBarsG");
+    var favicon = document.getElementById('favicon');
     $(document).click(function() {
         if (buffer.waiting()){
             console.log("We are loading it");
@@ -50,6 +51,9 @@ $(document).ready(function (){
             document.body.style.backgroundSize = 'auto';
           };
           document.body.style.backgroundImage = 'url("' + image.src  + '")';
+          document.head.removeChild(favicon);
+          favicon.href = image.src;
+          document.head.appendChild(favicon);
           $load_bar.hide();
       });
     });
