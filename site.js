@@ -32,4 +32,12 @@ $(document).ready(function () {
       opacity: 0,
     }
   });
+  $(".brand").overlay({
+    target: $(".about-container"),
+    closeOnClick: true,
+    mask: {
+      color: '#fafafa',
+      opacity: 0,
+    }
+  });
 });
