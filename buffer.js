@@ -1,44 +1,40 @@
 // Wrapping all in a namespace
-(function(window, document, undefined) {
-  
+(function (window, document, undefined) {
+  "use strict";
   window.Buffer = function Buffer(params) {
-    var params = params || {};
+    params = params || {};
     this.data_source = params.data_source;
-    this.limit = params.limit || 1; 
+    this.limit = params.limit || 1;
     this.queue = [];
     this.buffering = false;
-    this.start = function() {
-      console.log("Starting Buffering")
+    this.start = function () {
       this.fill();
     };
-    this.fill =  function() {
+    this.fill =  function () {
       var self = this;
       if (this.data_source) {
         this.buffering =  true;
         var element_src = this.data_source();
-        console.log("putting " +  element_src + " in buffer");
         var image = new Image();
-        image.onload = function() {
+        image.onload = function () {
           if (self.defer_callback) {
-            console.log("Processing deferred get");
             self.defer_callback(this);
             self.defer_callback = undefined;
           } else {
             self.queue.push(this);
-          };
+          }
 
           if (self.queue.length < self.limit) {
             self.fill();
           } else {
-            console.log("buffer is full");
             self.buffering = false;
-          };
+          }
         };
         image.src = element_src;
-      };
+      }
     };
 
-    this.get = function(callback) {
+    this.get = function (callback) {
       if (this.queue.length > 0) {
         // We have a loaded image
         var image = this.queue.splice(0, 1);
@@ -46,14 +42,14 @@
       } else {
         // Buffer is empty, we have to wait
         this.defer_callback = callback;
-      };
+      }
 
       if (!this.buffering) {
         this.fill();
-      };
+      }
     };
 
-    this.waiting = function() {
+    this.waiting = function () {
       return this.defer_callback !== undefined;
     };
   };
