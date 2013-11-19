@@ -1,14 +1,17 @@
 window.start_loading = function () {
+  "use strict";
   $('.brand').hide();
   $('.loader').show();
-}
+};
 
 window.end_loading = function () {
+  "use strict";
   $('.brand').show();
   $('.loader').hide();
-}
+};
 
-$(document).ready(function (){
+$(document).ready(function () {
+  "use strict";
   var $rollover = $('.rollover');
   $rollover.hover(function (evt) {
     var anim_params = {
@@ -20,5 +23,13 @@ $(document).ready(function (){
     } else {
       $rollover.animate({left: -136}, anim_params);
     }
-  })
-})
+  });
+  $(".fb").overlay({
+    target: $(".fb-container"),
+    closeOnClick: true,
+    mask: {
+      color: '#fafafa',
+      opacity: 0,
+    }
+  });
+});

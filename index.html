@@ -11,9 +11,7 @@
       <a href="https://github.com/useless-code/the_gif" target="_blank">
         <img src="img/logo-gh.png"/>
       </a>
-      <a href="https://www.facebook.com/thegifweb" target="_blank">
-        <img src="img/logo-fb.png"/>
-      </a>
+      <img class="fb" src="img/logo-fb.png"/>
       <a href="https://twitter.com/_thegif" target="_blank">
         <img src="img/logo-tw.png"/>
       </a>
@@ -28,6 +26,7 @@
       </a>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    <script src="//cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
     <script content="text/javascript" src="site.js" ></script>
     <script content="text/javascript" src="buffer.js" ></script>
     <script content="text/javascript" src="app.picassa.js" ></script>
@@ -39,6 +38,26 @@
       
         ga('create', 'UA-42411168-1', 'useless-code.github.io');
       ga('send', 'pageview');
-    </script>  
+    </script> 
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374288236051417";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="fb-container"> 
+      <div class="fb-like-box"
+        data-href="http://www.facebook.com/thegifweb"
+        data-colorscheme="light"
+        data-show-faces="true"
+        data-header="false"
+        data-stream="false"
+        data-show-border="false">
+      </div>
+    </div>
   </body>
 </html>
