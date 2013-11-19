@@ -11,7 +11,7 @@ body {
 .rollover {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -136px;
     height: 48px;
     width: 188px;
 }
@@ -22,3 +22,37 @@ body {
     float: left;
 }
 
+.rotate-container {
+    width: 52px;
+    height: 48px;
+    float: left;
+    overflow: hidden;
+    display: none;
+}
+
+.rotate-container img {
+    position: relative;
+    top: -12px;
+    left: -10px;
+    float: none;
+}
+
+.rotate {
+    -webkit-animation: spin .8s infinite linear;
+    animation: spin .8s infinite linear;
+}
+
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    100% {
+        -moz-transform:rotate(360deg);
+        -o-transform:rotate(360deg);
+        transform:rotate(360deg);
+    }
+}

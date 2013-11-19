@@ -14,8 +14,8 @@ $(document).ready(function (){
   function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  
-  
+
+
 
   function process_response(response) {
     var data_list = response.feed.entry;
@@ -25,7 +25,7 @@ $(document).ready(function (){
       copy_of_gift_list.push(url)
     };
   };
-    
+
   function random_gif(){
     if (copy_of_gift_list.length == 0) {
       copy_of_gift_list = gif_list.slice(0);
@@ -33,9 +33,9 @@ $(document).ready(function (){
     var index = getRandomInt(0, copy_of_gift_list.length - 1);
       return copy_of_gift_list.splice(index, 1);
   };
-  
+
     var buffer = new window.Buffer({
-        data_source: random_gif, 
+        data_source: random_gif,
         limit: 10,
   });
 
@@ -54,18 +54,17 @@ $(document).ready(function (){
 
 
   $.get(get_random_album(), function(response) {
-    
+
     process_next(response);
     buffer.start();
-  
-    $load_bar = $("#fadingBarsG");
+
     var favicon = document.getElementById('favicon');
     $(document).click(function() {
         if (buffer.waiting()){
             console.log("We are loading it");
             return;
         };
-        $load_bar.show();
+        window.start_loading();
         buffer.get( function (image) {
           if (image.height < 270 && image.width > image.height) {
             var size = Math.floor((270 / image.height) * image.width);
@@ -79,7 +78,7 @@ $(document).ready(function (){
           document.head.removeChild(favicon);
           favicon.href = image.src;
           document.head.appendChild(favicon);
-          $load_bar.hide();
+          window.end_loading();
       });
     });
     $(document).click();
