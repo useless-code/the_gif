@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    <script>
+      $(document).ready(function () {
+      var requiredScope = "https://picasaweb.google.com/data/";
+      var clientId = "905230770217-up0as7lugetsafc7v9ibqpffrrij99kh.apps.googleusercontent.com"
+      var adminPage = "http://the_gif.com.ar/admin.html";
+      var url = "https://accounts.google.com/o/oauth2/auth?";
+      var params = $.param({
+        scope: requiredScope,
+        state: "foo-bar",
+        redirect_uri: adminPage,
+        response_type: 'token',
+        client_id: clientId,
+      });
+      $('#login').click(function () {
+            window.location(url + params); 
+      })
+    });
+    </script>
+  </head>
+  <body>
+    <button id="login" >Login</button> 
+  </body>
+</html>
