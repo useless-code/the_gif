@@ -66,6 +66,11 @@ $(document).ready(function () {
             $(document).click(
                 this.onClick.bind(this)
             );
+            $(document).on('keypress', function (e) {
+                if(e.keyCode === 32) {
+                    this.onClick();
+                }
+            }.bind(this));
             this.loadInitialGif();
             this.getAllAlbums().done(function () {
                 this.buffer.start();
