@@ -11,17 +11,24 @@
       this.fill();
     };
     this.fill =  function () {
-      var self = this;
       if (this.data_source) {
         this.buffering =  true;
-        var element_src = this.data_source();
+        var element = this.data_source();
+        if (element) {
+            this.loadImage(element);
+        };
+      }
+    };
+    this.loadImage = function (element) {
+        var self = this;
         var image = new Image();
         image.onload = function () {
+          element.data = this;
           if (self.defer_callback) {
-            self.defer_callback(this);
+            self.defer_callback(element);
             self.defer_callback = undefined;
           } else {
-            self.queue.push(this);
+            self.queue.push(element);
           }
 
           if (self.queue.length < self.limit) {
@@ -30,10 +37,8 @@
             self.buffering = false;
           }
         };
-        image.src = element_src;
-      }
+        image.src = element.src;
     };
-
     this.get = function (callback) {
       if (this.queue.length > 0) {
         // We have a loaded image
