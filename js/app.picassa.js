@@ -104,7 +104,7 @@ $(document).ready(function () {
             };
         },
         onClick: function () {
-            ga('send', 'event', {title: 'next gif requested'});
+            ga('send', 'event', {title: 'next' + window.location.hash});
             if (this.buffer.waiting()) {
                 return;
             }
@@ -125,7 +125,7 @@ $(document).ready(function () {
             this.updateFragment(element)
             this.updateFavicon(image);
             window.end_loading();
-            ga('send', 'event', {title: 'next gif loaded', album: element.album, gif_id: element.id});
+            ga('send', 'event', {title: 'loaded ' + element.album + " - " +element.id});
         },
         updateFavicon: function (image) {
             document.head.removeChild(this.favicon);
