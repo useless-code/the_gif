@@ -68,7 +68,7 @@ $(document).ready(function () {
                 this.onClick.bind(this)
             );
             $(document).on('keypress', function (e) {
-                if(e.keyCode === 32) {
+                if(e.keyCode === 32 || e.charCode === 32 ) {
                     this.onClick();
                 }
             }.bind(this));
@@ -112,17 +112,25 @@ $(document).ready(function () {
             this.buffer.get(this.updateGif.bind(this));
         },
         updateGif: function (element) {
-            var image = element.data, w = image.width, h = image.height;
-            if (h < 270 && w > h) {
-                var size = Math.floor((270 / h) * w);
-                document.body.style.backgroundSize = size + 'px';
-            } else if (w < 300) {
-                document.body.style.backgroundSize = '300px';
+            var image = element.data,
+                w = image.width,
+                h = image.height,
+                max_h = $(window).height(),
+                max_w = $(window).width(),
+                min_h = Math.min(270, max_h),
+                min_w = Math.min(300, max_h),
+                out_w;
+
+            if (h < min_h && w > h) {
+                out_w = Math.floor((min_h / h) * w);
+            } else if (w < min_w) {
+                out_w = Math.floor(min_w);
             } else {
-                document.body.style.backgroundSize = 'auto';
+                out_w = w;
             }
+            document.body.style.backgroundSize = Math.min(out_w, max_w) + 'px';
             document.body.style.backgroundImage = 'url("' + image.src  + '")';
-            document.body.style.backgroundPosition = 'auto';
+            document.body.style.backgroundPosition = '0 0';
             document.body.style.backgroundRepeat = 'repeat';
             this.updateFragment(element)
             this.updateFavicon(image);
