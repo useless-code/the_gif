@@ -122,6 +122,8 @@ $(document).ready(function () {
                 document.body.style.backgroundSize = 'auto';
             }
             document.body.style.backgroundImage = 'url("' + image.src  + '")';
+            document.body.style.backgroundPosition = 'auto';
+            document.body.style.backgroundRepeat = 'repeat';
             this.updateFragment(element)
             this.updateFavicon(image);
             window.end_loading();
