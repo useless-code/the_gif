@@ -1,1 +1,5 @@
+*.py
+*.pyc
+*.pickle
+build/
 *.swp
