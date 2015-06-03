@@ -36,6 +36,7 @@ else:
     url_tree = {}
 
     for id, gallery in galleries.items():
+        print "Processing gallery:", gallery
         url = url_template.format(**gallery)
         r = requests.get(url)
         for entry in r.json()['feed']['entry']:
@@ -49,7 +50,9 @@ else:
 
 
     with open('static/data.json', 'w') as fh:
+        print "Creating json"
         json.dump(all_gifs, fh)
 
     with open('backup.pickle', 'wb') as fh:
+        print "Creating backup"
         pickle.dump((all_gifs, url_tree), fh)
