@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+from galleries import url_tree
+
 app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
@@ -8,9 +10,14 @@ app.config.from_object(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/g/<string:user>/<string:gallery>/<string:image_id>/')
-def gif_detail(user, gallery, image_id):
-    return render_template('gif.html', user=user, gallery=gallery, image_id=image_id)
+#@app.route('/about/')
+#def about():
+#    pass
+
+@app.route('/g/<string:gallery>/<string:gif_id>/')
+def gif_detail(gallery, gif_id):
+    url = url_tree[gallery][gif_id]
+    return render_template('gif.html', gallery=gallery, gif_id=gif_id, url=url)
 
 if __name__ == "__main__":
     app.run()

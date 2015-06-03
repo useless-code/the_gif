@@ -2,55 +2,36 @@
   <head>
     <meta charset="utf-8">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <title>THE GIF</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <meta property="og:image" content="http://thegif.org/img/fb_thumb.jpg"/>
-    <meta property="og:url" content="http://thegif.org"/>
-    <meta property="og:title" content="THE GIF"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="THE GIF"/>
-    <meta property="og:description" content="Curated random gifs for human beings"/>
-    <meta name="twitter:card" content="summary" />
+    <title>The Gif</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css"/>
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@_thegif" />
-    <meta name="twitter:title" content="The Gif" />
-    <meta name="twitter:description" content="Curated random gifs for human beings" />
-    <meta name="twitter:image" content="https://thegif.org/img/fb_thumb.jpg" />
-    <link id="favicon" rel="icon" type="image/gif" href="#"/>
+    <meta property="og:url" content="http://thegif.org"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="The Gif"/>
+    <meta property="og:title" content="The Gif"/>
+    <meta property="og:description" content="Curated random gifs for human beings"/>
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static' ,filename='img/fb_thumb.jpg') }}{% endblock %}"/>
+    <link id="favicon" rel="icon" type="image/gif" href=""/>
     <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <script>
-        window.fbAsyncInit = function() {
-              FB.init({
-                  appId      : '374288236051417',
-                  status     : true,
-                  xfbml      : true
-              });
-        };
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374288236051417";
-        fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
     <div class="rollover">
       <a href="https://github.com/useless-code/the_gif" target="_blank">
-        <img src="img/logo-gh.png"/>
+        <img src="{{ url_for('static', filename='img/logo-gh.png') }}"/>
       </a>
-      <img class="fb" src="img/logo-fb.png"/>
+      <img class="fb" src="{{ url_for('static', filename='img/logo-fb.png') }}"/>
       <a href="https://twitter.com/_thegif" target="_blank">
-        <img src="img/logo-tw.png"/>
+        <img src="{{ url_for('static', filename='img/logo-tw.png') }}"/>
       </a>
       <a href="https://plus.google.com/107889078133006022786" rel="publisher" target="_blank">
-        <img src="img/logo-gplus.png"/>
+        <img src="{{ url_for('static', filename='img/logo-gplus.png') }}"/>
       </a>
       <a href="#about">
         <div class="rotate-container loader">
-          <img class="rotate" src="img/spinner.png"/></a>
+          <img class="rotate" src="{{ url_for('static', filename='img/spinner.png') }}"/></a>
         </div>
-        <img class="brand" src="img/logo.png"/>
+        <img class="brand" src="{{ url_for('static', filename='img/logo.png') }}"/>
       </a>
     </div>
     <div class="fb-container"> 
@@ -82,12 +63,26 @@
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.7/jquery.tools.min.js"></script>
-    <script content="text/javascript" src="js/site.js" ></script>
-    <script content="text/javascript" src="js/buffer.js" ></script>
-    <script content="text/javascript" src="lib/BigInteger.min.js" ></script>
-    <script content="text/javascript" src="js/base65.js" ></script>
-    <script content="text/javascript" src="js/app.picassa.js" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='js/site.js') }}" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='js/buffer.js') }}" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='lib/BigInteger.min.js') }}" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='js/base65.js') }}" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='js/app.picassa.js') }}" ></script>
     <script>
+        window.fbAsyncInit = function() {
+              FB.init({
+                  appId      : '374288236051417',
+                  status     : true,
+                  xfbml      : true
+              });
+        };
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374288236051417";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -95,6 +90,8 @@
       
         ga('create', 'UA-42411168-1', 'thegif.org');
       ga('send', 'pageview');
+      {% block extrajs %}
+      {% endblock %}
     </script> 
     <div id="fb-root"></div>
   </body>
