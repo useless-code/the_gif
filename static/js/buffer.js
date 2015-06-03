@@ -20,24 +20,24 @@
       }
     };
     this.loadImage = function (element) {
-        var self = this;
         var image = new Image();
+        image.album = element[0]
+        image.gifId = element[1]
         image.onload = function () {
-          element.data = this;
-          if (self.defer_callback) {
-            self.defer_callback(element);
-            self.defer_callback = undefined;
+          if (this.defer_callback) {
+            this.defer_callback(image);
+            this.defer_callback = undefined;
           } else {
-            self.queue.push(element);
+            this.queue.push(image);
           }
 
-          if (self.queue.length < self.limit) {
-            self.fill();
+          if (this.queue.length < this.limit) {
+            this.fill();
           } else {
-            self.buffering = false;
+            this.buffering = false;
           }
-        };
-        image.src = element.src;
+        }.bind(this);
+        image.src = element[2];
     };
     this.get = function (callback) {
       if (this.queue.length > 0) {

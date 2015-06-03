@@ -21,6 +21,7 @@ html {
     left: -136px;
     height: 48px;
     width: 188px;
+    background-color: rgba(255,255,255,0.5);
 }
 
 
@@ -75,7 +76,7 @@ html {
     width: 300px;
     z-index: 100000;
    /* background: black; */
-    background: url('img/logo-about.png') no-repeat top 20px right 20px black;
+    background: url('../img/logo-about.png') no-repeat top 20px right 20px black;
     color: #fafafa;
     font-size: 12px;
     padding: 20px;

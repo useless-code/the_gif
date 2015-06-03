@@ -12,7 +12,7 @@
     <meta property="og:title" content="The Gif"/>
     <meta property="og:description" content="Curated random gifs for human beings"/>
     <meta property="og:image" content="{% block og_image %}{{ url_for('static' ,filename='img/fb_thumb.jpg') }}{% endblock %}"/>
-    <link id="favicon" rel="icon" type="image/gif" href=""/>
+    <link id="favicon" rel="icon" type="image/png" href="{{ url_for('static' ,filename='img/fb_thumb.jpg') }}"/>
     <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -65,9 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.7/jquery.tools.min.js"></script>
     <script content="text/javascript" src="{{ url_for('static', filename='js/site.js') }}" ></script>
     <script content="text/javascript" src="{{ url_for('static', filename='js/buffer.js') }}" ></script>
-    <script content="text/javascript" src="{{ url_for('static', filename='lib/BigInteger.min.js') }}" ></script>
-    <script content="text/javascript" src="{{ url_for('static', filename='js/base65.js') }}" ></script>
-    <script content="text/javascript" src="{{ url_for('static', filename='js/app.picassa.js') }}" ></script>
+    <script content="text/javascript" src="{{ url_for('static', filename='js/app.js') }}" ></script>
     <script>
         window.fbAsyncInit = function() {
               FB.init({
@@ -90,6 +88,7 @@
       
         ga('create', 'UA-42411168-1', 'thegif.org');
       ga('send', 'pageview');
+      window.theGif.ga = ga
       {% block extrajs %}
       {% endblock %}
     </script> 

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block og_image %}{{url}}{% endblock %}
 {% block extrajs %}
-  console.log("{{gallery}}");
-  console.log("{{gif_id}}");
+  window.theGif.run("{{ url_for('static', filename='data.json' )}}", "{{ gallery }}", "{{ gif_id }}", "{{ url }}");
 {% endblock %}

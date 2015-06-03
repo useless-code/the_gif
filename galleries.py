@@ -1,4 +1,5 @@
-import gzip
+import os
+import pickle
 import json
 from collections import namedtuple
 
@@ -27,23 +28,28 @@ def encode(number):
 
     return out
 
+if os.path.exists('backup.pickle'):
+    with open('backup.pickle', 'rb') as fh:
+        all_gifs, url_tree = pickle.load(fh)
+else:
+    all_gifs = []
+    url_tree = {}
+
+    for id, gallery in galleries.items():
+        url = url_template.format(**gallery)
+        r = requests.get(url)
+        for entry in r.json()['feed']['entry']:
+            url = entry['media$group']['media$content'][0]['url']
+            gif_id = encode(int(entry['gphoto$id']['$t']))
+
+            gallery_fold = url_tree.setdefault(id, {})
+            gallery_fold[gif_id] = url
+
+            all_gifs.append(Register(id, gif_id, url))
 
 
-all_gifs = []
-url_tree = {}
+    with open('static/data.json', 'w') as fh:
+        json.dump(all_gifs, fh)
 
-for id, gallery in galleries.items():
-    url = url_template.format(**gallery)
-    r = requests.get(url)
-    for entry in r.json()['feed']['entry']:
-        url = entry['media$group']['media$content'][0]['url']
-        gif_id = encode(int(entry['gphoto$id']['$t']))
-
-        gallery_fold = url_tree.setdefault(id, {})
-        gallery_fold[gif_id] = url
-
-        all_gifs.append(Register(id, gif_id, url))
-
-
-with gzip.open('static/data.json.gz', 'w') as fh:
-    json.dump(all_gifs, fh)
+    with open('backup.pickle', 'wb') as fh:
+        pickle.dump((all_gifs, url_tree), fh)
