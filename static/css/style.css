@@ -1,0 +1,83 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'Carrois Gothic', sans-serif;
+    background: url('../img/fb_thumb.jpg') center center no-repeat;
+    height: 100%; 
+    position: fixed;
+}
+
+html {
+    height: 100%;
+}
+
+.rollover {
+    position: fixed;
+    top: 0;
+    left: -136px;
+    height: 48px;
+    width: 188px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+
+.rollover img {
+    display: block;
+    float: left;
+}
+
+.rotate-container {
+    width: 52px;
+    height: 48px;
+    float: left;
+    overflow: hidden;
+    display: none;
+}
+
+.rotate-container img {
+    position: relative;
+    top: -12px;
+    left: -10px;
+    float: none;
+}
+
+.rotate {
+    -webkit-animation: spin .8s infinite linear;
+    animation: spin .8s infinite linear;
+}
+
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    100% {
+        -moz-transform:rotate(360deg);
+        -o-transform:rotate(360deg);
+        transform:rotate(360deg);
+    }
+}
+
+.fb-container {
+    display: none;
+    z-index: 100000;
+    background: white;
+}
+
+.about-container {
+    display: none;
+    width: 300px;
+    z-index: 100000;
+   /* background: black; */
+    background: url('../img/logo-about.png') no-repeat top 20px right 20px black;
+    color: #fafafa;
+    font-size: 12px;
+    padding: 20px;
+}
