@@ -1,4 +1,4 @@
 #! /usr/bin/bash 
 
 echo "Starting deploy"
-rm backup.pickle && python freezer.py && git checkout gh-pages && mv -f build/* . && git add . && git commit -m "Automatic deploy"
+rm backup.pickle && python freezer.py && git checkout gh-pages && rsync -r build/ . && git add . && git commit -m "Automatic deploy"
