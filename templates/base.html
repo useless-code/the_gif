@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css"/>
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@_thegif" />
-    <meta property="og:url" content="http://thegif.org"/>
+    <meta property="og:url" content="http://www.thegif.org{% block og_url %}{% endblock %}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="The Gif"/>
     <meta property="og:title" content="The Gif"/>
