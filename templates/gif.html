@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block og_url %}{{url_for('gif_detail', gallery=gallery, gif_id=gif_id )}}{% endblock %}
+{% block og_image %}{{url}}{% endblock %}
+{% block extra_og_tags %}
+<meta property="og:image:width" content="{{ width }}"/>
+<meta property="og:image:height" content="{{ height }}"/>
+{% endblock %}
+{% block extrajs %}
+  window.theGif.run("{{ url_for('static', filename='data.json' )}}", "{{ gallery }}", "{{ gif_id }}", "{{ url }}");
+{% endblock %}

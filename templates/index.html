@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block og_image %}{{ url_for('static' ,filename='img/fb_thumb.jpg') }}{% endblock %}
+{% block extrajs %}
+  window.theGif.run("{{ url_for('static', filename='data.json' )}}");
+{% endblock %}
