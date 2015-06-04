@@ -12,6 +12,7 @@
     <meta property="og:title" content="The Gif"/>
     <meta property="og:description" content="Curated random gifs for human beings"/>
     <meta property="og:image" content="{% block og_image %}{{ url_for('static' ,filename='img/fb_thumb.jpg') }}{% endblock %}"/>
+    {% block extra_og_tags %}{% endblock %}
     <link id="favicon" rel="icon" type="image/png" href="{{ url_for('static' ,filename='img/fb_thumb.jpg') }}"/>
     <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>

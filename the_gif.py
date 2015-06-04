@@ -16,8 +16,9 @@ def index():
 
 @app.route('/g/<string:gallery>/<string:gif_id>/')
 def gif_detail(gallery, gif_id):
-    url = url_tree[gallery][gif_id]
-    return render_template('gif.html', gallery=gallery, gif_id=gif_id, url=url)
+    url, width, height = url_tree[gallery][gif_id]
+    return render_template('gif.html', gallery=gallery, gif_id=gif_id, url=url, width=width,
+                          height=height)
 
 if __name__ == "__main__":
     app.run()

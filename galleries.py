@@ -43,8 +43,10 @@ else:
             url = entry['media$group']['media$content'][0]['url']
             gif_id = encode(int(entry['gphoto$id']['$t']))
 
+            width = entry['gphoto$width']['$t']
+            height = entry['gphoto$height']['$t']
             gallery_fold = url_tree.setdefault(id, {})
-            gallery_fold[gif_id] = url
+            gallery_fold[gif_id] = (url, width, height)
 
             all_gifs.append(Register(id, gif_id, url))
 
